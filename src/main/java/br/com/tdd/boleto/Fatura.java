@@ -36,4 +36,15 @@ public class Fatura {
     public void setPago(boolean pago) {
         this.pago = pago;
     }
+
+    public void adicionaPagamento(Pagamento pagamento) {
+        this.pagamentos.add(pagamento);
+        double valorTotal = 0;
+        for (Pagamento p : pagamentos) {
+            valorTotal += p.getValor();
+        }
+        if (valorTotal >= this.valor) {
+            this.pago = true;
+        }
+    }
 }
