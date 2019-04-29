@@ -58,4 +58,5 @@ class GeradorDeNotaFiscalTest {
         Mockito.verify(acao1).executa(nf);
         Mockito.verify(acao2).executa(nf);
     }
+    
 }

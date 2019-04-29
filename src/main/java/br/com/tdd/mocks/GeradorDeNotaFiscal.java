@@ -5,14 +5,21 @@ import java.util.List;
 
 public class GeradorDeNotaFiscal {
 
-    private List<AcaoAposGerarNota> acaoAposGerarNota;
+    private final List<AcaoAposGerarNota> acaoAposGerarNota;
+    private final Relogio relogio;
 
-    public GeradorDeNotaFiscal(List<AcaoAposGerarNota> acaoAposGerarNota) {
+    public GeradorDeNotaFiscal(List<AcaoAposGerarNota> acaoAposGerarNota,
+                               Relogio relogio) {
         this.acaoAposGerarNota = acaoAposGerarNota;
+        this.relogio = relogio;
+    }
+
+    public GeradorDeNotaFiscal(List<AcaoAposGerarNota> acaoAposGerarNotarelogio) {
+        this(acaoAposGerarNotarelogio, new RelogiodoSistema());
     }
 
     public NotaFiscal gera(Pedido pedido) {
-        NotaFiscal nf = new NotaFiscal(pedido.getCliente(), pedido.getValorTotal() * 0.94, Calendar.getInstance());
+        NotaFiscal nf = new NotaFiscal(pedido.getCliente(), pedido.getValorTotal() * 0.94, relogio.hoje());
 
         for (AcaoAposGerarNota acao : acaoAposGerarNota) {
             acao.executa(nf);
